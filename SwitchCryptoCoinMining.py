@@ -4,7 +4,7 @@ from Scraping import Scraping
 from Miner import StartMining
 import time
 import configparser
-import signal
+import os
 
 config = configparser.RawConfigParser()
 config.read('Setting.cfg')
@@ -37,64 +37,79 @@ while True:
         # MiningPoolhub
         # FTC
         if crypto[i][0] == 'Feathercoin(FTC)NeoScrypt':
-            if not NowCoin == '' and not NowCoin == 'FTC':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'FTC':
+            if not NowCoin == 'FTC':
+                if NowCoin == 'Zcash(ZEC)' or NowCoin == 'ZCL':
+                    os.system("taskkill /f /im bminer.exe")
+                else:
+                    # proc.terminate()
+                    os.system("taskkill /f /im ccminer-x64.exe")
                 proc = StartMining.FTC()
                 NowCoin = 'FTC'
             break
         # Groestlcoin
         elif crypto[i][0] == 'GroestlCoin(GRS)Groestl':
-            if not NowCoin == '' and not NowCoin == 'GroestlCoin':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'GroestlCoin':
+            if not NowCoin == 'GroestlCoin':
+                if NowCoin == 'Zcash(ZEC)' or NowCoin == 'ZCL':
+                    os.system("taskkill /f /im bminer.exe")
+                else:
+                    # proc.terminate()
+                    os.system("taskkill /f /im ccminer-x64.exe")
                 proc = StartMining.GroestlCoin()
                 NowCoin = 'GroestlCoin'
             break
-        # LBRY
-        elif crypto[i][0] == 'LBRY(LBC)LBRY':
-            if not NowCoin == '' and not NowCoin == 'LBRY':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'LBRY':
-                proc = StartMining.LBRY()
-                NowCoin = 'LBRY'
-            break
-        # MONA
-        elif crypto[i][0] == 'Monacoin(MONA)Lyra2REv2':
-            if not NowCoin == '' and not NowCoin == 'MONA':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'MONA':
-                proc = StartMining.MONA()
-                NowCoin = 'MONA'
-            break
+        # # LBRY
+        # elif crypto[i][0] == 'LBRY(LBC)LBRY':
+        #     if not NowCoin == '' and not NowCoin == 'LBRY':
+        #         proc.terminate()
+        #     if NowCoin == '' or not NowCoin == 'LBRY':
+        #         proc = StartMining.LBRY()
+        #         NowCoin = 'LBRY'
+        #     break
+        # # MONA
+        # elif crypto[i][0] == 'Monacoin(MONA)Lyra2REv2':
+        #     if not NowCoin == '' and not NowCoin == 'MONA':
+        #         proc.terminate()
+        #     if NowCoin == '' or not NowCoin == 'MONA':
+        #         proc = StartMining.MONA()
+        #         NowCoin = 'MONA'
+        #     break
         # VTC
         elif crypto[i][0] == 'Vertcoin(VTC)Lyra2REv2':
-            if not NowCoin == '' and not NowCoin == 'VTC':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'VTC':
+            if not NowCoin == 'VTC':
+                if NowCoin == 'Zcash(ZEC)' or NowCoin == 'ZCL':
+                    os.system("taskkill /f /im bminer.exe")
+                else:
+                    # proc.terminate()
+                    os.system("taskkill /f /im ccminer-x64.exe")
                 proc = StartMining.VTC()
                 NowCoin = 'VTC'
             break
         # ZEC
         elif crypto[i][0] == 'Zcash(ZEC)Equihash':
-            if not NowCoin == '' and not NowCoin == 'Zcash(ZEC)':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'Zcash(ZEC)':
+            if not NowCoin == 'Zcash(ZEC)':
+                if NowCoin == 'Zcash(ZEC)' or NowCoin == 'ZCL':
+                    os.system("taskkill /f /im bminer.exe")
+                else:
+                    # proc.terminate()
+                    os.system("taskkill /f /im ccminer-x64.exe")
                 proc = StartMining.ZEC()
                 NowCoin = 'Zcash(ZEC)'
             break
         # ZCL
         elif crypto[i][0] == 'Zclassic(ZCL)Equihash':
-            if not NowCoin == '' and not NowCoin == 'ZCL':
-                proc.send_signal(signal.CTRL_C_EVENT)
-            if NowCoin == '' or not NowCoin == 'ZCL':
+            if not NowCoin == 'ZCL':
+                if NowCoin == 'Zcash(ZEC)' or NowCoin == 'ZCL':
+                    os.system("taskkill /f /im bminer.exe")
+                else:
+                    # proc.terminate()
+                    os.system("taskkill /f /im ccminer-x64.exe")
                 proc = StartMining.ZCL()
                 NowCoin = 'ZCL'
             break
         # # Ethash
         # elif crypto[i][0] == 'Ethereum(ETH)Ethash' or crypto[i][0] == 'EthereumClassic(ETC)Ethash' or crypto[i][0] == 'Expanse(EXP)Ethash':
         #     if not NowCoin == '' and not NowCoin == 'Ethash':
-        #         proc.send_signal(signal.CTRL_C_EVENT)
+        #         proc.terminate()
         #     if NowCoin == '' or not NowCoin == 'Ethash':
         #         proc = StartMining.Ethash()
         #         NowCoin = 'Ethash'
@@ -110,7 +125,7 @@ while True:
         # # Nicehash-Lyra2REv2
         # elif crypto[i][0] == 'Nicehash-Lyra2REv2Lyra2REv2':
         #     if not NowCoin == '' and not NowCoin == 'Nicehash-Lyra2REv2':
-        #         proc.send_signal(signal.CTRL_C_EVENT)
+        #         proc.terminate()
         #     if NowCoin == '' or not NowCoin == 'Nicehash-Lyra2REv2':
         #         proc = StartMining.Nicehash_Lyra2REv2()
         #         NowCoin = 'Nicehash-Lyra2REv2'
@@ -118,7 +133,7 @@ while True:
         # # Nicehash-NeoScrypt
         # elif crypto[i][0] == 'Nicehash-NeoScryptNeoScrypt':
         #     if not NowCoin == '' and not NowCoin == 'Nicehash-NeoScrypt':
-        #         proc.send_signal(signal.CTRL_C_EVENT)
+        #         proc.terminate()
         #     if NowCoin == '' or not NowCoin == 'Nicehash-NeoScrypt':
         #         proc = StartMining.Nicehash_NeoScrypt()
         #         NowCoin = 'Nicehash-NeoScrypt'
