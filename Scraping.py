@@ -4,6 +4,12 @@ import numpy as np
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from datetime import datetime
+import configparser
+
+config = configparser.ConfigParser()
+config.read('Setting.cfg')
+
+ChromeWebdriverPath = config['Scraping']['ChromeWebdriverPath']
 
 
 class Scraping:
@@ -26,8 +32,7 @@ class Scraping:
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
-        driver = webdriver.Chrome(executable_path='H:\\Project\\WebDriver\\chromedriver_win32_2.36\\chromedriver.exe',
-                                  chrome_options=options)
+        driver = webdriver.Chrome(executable_path=ChromeWebdriverPath, chrome_options=options)
         # データの取得
         driver.get(self.target_url)
         html = driver.page_source.encode('utf-8')
@@ -36,7 +41,7 @@ class Scraping:
 
         # テーブルを指定
         try:
-            table = bs_obj.findAll("table", {"class": "table table-hover table-vcenter"})[0]
+            table = bs_obj.findAll("table", {"class": "table table-sm table-hover table-vcenter"})[0]
             rows = table.findAll("tr")
         except:
             return self.crypto
